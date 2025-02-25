@@ -1,0 +1,148 @@
+/* Markdown Formatter Styles with Cattpuchin Colors */
+
+/* Base styles for the container */
+.markdown-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #fff8f1; /* Soft light background */
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings - Use soft peachy and light coral colors */
+.markdown-container h1 {
+  color: #ff6f61; /* Coral */
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-container h2 {
+  color: #ff8a80; /* Lighter coral */
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.markdown-container h3 {
+  color: #ffabab; /* Soft pastel pink */
+  font-size: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Paragraphs - Light grayish color for readability */
+.markdown-container p {
+  color: #4a4a4a; /* Dark gray for text */
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Bold text */
+.markdown-container strong {
+  color: #ff6f61; /* Bold coral for emphasis */
+}
+
+/* Italic text */
+.markdown-container em {
+  color: #b4e1e0; /* Mint green */
+  font-style: italic;
+}
+
+/* Links - Light mint with hover effect */
+.markdown-container a {
+  color: #b4e1e0; /* Mint green */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.markdown-container a:hover {
+  color: #ff6f61; /* Coral hover effect */
+  text-decoration: underline;
+}
+
+/* Lists - Style ordered and unordered lists */
+.markdown-container ul,
+.markdown-container ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.markdown-container li {
+  margin-bottom: 0.6rem;
+  color: #4a4a4a;
+}
+
+/* Code Blocks */
+.markdown-container pre {
+  background-color: #1e1e1e; /* Dark background for code */
+  color: #f5f5f5; /* Light text */
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Inline Code */
+.markdown-container code {
+  background-color: #f4f4f4; /* Light gray background */
+  color: #d94f5a; /* Soft red for code */
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Blockquotes - Use a soft mint green for the left border */
+.markdown-container blockquote {
+  background-color: #f9f9f9;
+  border-left: 5px solid #b4e1e0; /* Mint green border */
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: #4a4a4a;
+}
+
+/* Images - Add max-width and border radius for style */
+.markdown-container img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+/* Tables - Simple and clean table styling */
+.markdown-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.markdown-container th,
+.markdown-container td {
+  border: 1px solid #e0e0e0;
+  padding: 0.8rem;
+  text-align: left;
+}
+
+.markdown-container th {
+  background-color: #ff6f61; /* Coral */
+  color: white;
+}
+
+.markdown-container tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.markdown-container tr:hover {
+  background-color: #ffabab; /* Soft pastel pink hover */
+}
+
+/* Horizontal rule */
+.markdown-container hr {
+  border: 0;
+  height: 1px;
+  background-color: #ff6f61; /* Coral line */
+  margin: 2rem 0;
+}

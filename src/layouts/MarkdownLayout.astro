@@ -1,0 +1,30 @@
+---
+import ExcalidrawViewer from '@/components/ExcalidrawViewer'
+import '@/styles/markdown.css'
+
+const {frontmatter, ...other} = Astro.props;
+
+const isExcalidraw = frontmatter.tags?.includes("excalidraw")
+const rawData = other.rawContent()
+let elements = []
+
+if (isExcalidraw) {
+  elements = JSON.parse(rawData).elements
+}
+---
+
+<head>
+  <link rel="stylesheet" href="/src/styles/markdown.css" />
+</head>
+<body>
+
+{isExcalidraw ? (
+  <div style={{height: '500px', backgroundColor: 'lightgray'}}>
+    <ExcalidrawViewer client:only="react" elements={elements}  />
+  </div>
+) : (
+  <div class="markdown-container">
+    <slot />
+  </div>
+)}
+</body>
