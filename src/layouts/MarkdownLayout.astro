@@ -1,30 +1,107 @@
 ---
-import ExcalidrawViewer from '@/components/ExcalidrawViewer'
-import '@/styles/markdown.css'
-
-const {frontmatter, ...other} = Astro.props;
-
-const isExcalidraw = frontmatter.tags?.includes("excalidraw")
-const rawData = other.rawContent()
-let elements = []
-
-if (isExcalidraw) {
-  elements = JSON.parse(rawData).elements
-}
+import 'rehype-callouts/theme/obsidian'
+import BaseLayout from './BaseLayout.astro'
 ---
 
-<head>
-  <link rel="stylesheet" href="/src/styles/markdown.css" />
-</head>
-<body>
-
-{isExcalidraw ? (
-  <div style={{height: '500px', backgroundColor: 'lightgray'}}>
-    <ExcalidrawViewer client:only="react" elements={elements}  />
-  </div>
-) : (
-  <div class="markdown-container">
+<BaseLayout>
+  <div class='markdown open' data-markdown>
     <slot />
   </div>
-)}
-</body>
+</BaseLayout>
+
+<script>
+  const sidebar = document.querySelector('[data-sidebar]')
+  const sidebarToggle = document.querySelector('[data-sidebar-toggle]')
+  const markdown = document.querySelector('[data-markdown]')
+
+  sidebarToggle?.addEventListener('click', () => {
+    markdown?.classList.toggle('open')
+  })
+</script>
+
+<style is:global>
+  .markdown {
+    max-width: 950px;
+    margin: 0 auto;
+    color: var(--text);
+    transition: 0.3s;
+    padding: 50px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 1500px) {
+    .markdown.open {
+      margin-left: 300px;
+    }
+  }
+  .callout {
+    mix-blend-mode: normal;
+  }
+  .callout-content {
+    margin-top: 10px;
+  }
+  .markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Merriweather', serif;
+    }
+    h1 {
+      color: var(--text-dark);
+      font-size: 48px;
+      /* border-bottom: 2px solid var(--background-3); */
+      background-color: var(--accent);
+      border-radius: 12px;
+      padding: 4px 16px;
+      margin-bottom: 3rem;
+    }
+    h2 {
+      font-size: 38px;
+    }
+    h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--h3);
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    h5 {
+      font-size: 24px;
+      color: var(--h5);
+      margin-bottom: 8px;
+    }
+    ul {
+      margin-left: 1.5rem;
+    }
+    ol {
+      margin-left: 2rem;
+    }
+    li {
+      padding: 6px 0;
+    }
+
+    ol > li {
+      list-style-type: decimal;
+    }
+    ul > li {
+      list-style-type: circle;
+    }
+    ul ul > li {
+      list-style-type: disc;
+    }
+
+    strong {
+      font-weight: 900;
+      /* color: var(--strong); */
+    }
+    hr {
+      color: var(--background-3);
+      margin: 3rem 0px;
+    }
+  }
+</style>

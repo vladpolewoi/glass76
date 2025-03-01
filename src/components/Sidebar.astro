@@ -1,88 +1,189 @@
 ---
-// Get the list of routes in the pages directory
-import fs from 'fs';
-import path from 'path';
+import SidebarLeftCollapseSvg from '@/assets/sidebar-left-collapse.svg'
+import LogoSvg from '@/assets/logo.svg'
+import FileExplorer from './FileExplorer.astro'
+import { Languages } from '@/hooks/useLanguage'
 
-// Define the path to your pages directory
-const pagesDir = path.resolve('./src/pages');
-
-// Function to recursively fetch the directory structure
-function getPages(dir) {
-  const files = fs.readdirSync(dir);
-  const routes = [];
-
-  files.forEach((file) => {
-    const filePath = path.join(dir, file);
-    const stats = fs.statSync(filePath);
-
-    if (stats.isDirectory()) {
-      routes.push({ name: file, type: 'directory', children: getPages(filePath) });
-    } else if (file.endsWith('.astro')) {
-      routes.push({ name: file.replace('.astro', ''), type: 'file' });
-    }
-  });
-
-  return routes;
+const tree = {
+  name: 'root',
+  type: 'directory',
+  children: [
+    {
+      name: 'TH 610 Christian Ethics',
+      type: 'directory',
+      children: [
+        {
+          name: 'Persons',
+          type: 'directory',
+          children: [
+            {
+              name: 'Plato',
+              type: 'file',
+              ext: 'md',
+              active: true,
+              slug: '/vault/th610-christian-ethics/persons/plato',
+            },
+            {
+              name: 'Aristotel',
+              type: 'file',
+              ext: 'md',
+              slug: '/vault/th610-christian-ethics/persons/aristotel',
+            },
+          ],
+        },
+        {
+          name: 'The Matrix of Christian Ethics',
+          type: 'file',
+          ext: 'sketch',
+          slug: '/vault/th610-christian-ethics/the-matrix-of-christian-ethics',
+        },
+        {
+          name: 'Reflections',
+          type: 'file',
+          ext: 'sketch',
+          slug: '/vault/th610-christian-ethics/reflections',
+        },
+        {
+          name: 'Intro',
+          type: 'file',
+          ext: 'md',
+          slug: '/en/vault/th610-christian-ethics/intro',
+        },
+      ],
+    },
+  ],
 }
 
-// Get the pages recursively
-const pages = getPages(pagesDir);
+function redirectToLocale(locale: Languages) {
+  const split = Astro.originPathname.split('/')
+
+  split[1] = locale
+
+  return split.join('/')
+}
 ---
 
-<aside class="sidebar">
-  <ul>
-    {pages.map((route) => (
-      <li>
-        <a href={`/${route.name}`}>
-          {route.name}
-        </a>
+<aside class:list={['sidebar', { active: true }]} data-sidebar>
+  <div class='sidebar-header'>
+    <div class='flex items-center gap-2'>
+      <LogoSvg color='var(--accent)' height={32} />
+      <h1 class='font-extrabold text-2xl'>Glass76</h1>
+    </div>
 
-        {route.children && route.children.length > 0 && (
-          <ul>
-            {route.children.map((subRoute) => (
-              <li>
-                <a href={`/${route.name}/${subRoute.name}`}>
-                  {subRoute.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    ))}
-  </ul>
+    <button class='button' data-sidebar-toggle>
+      <SidebarLeftCollapseSvg width={24} color='var(--text-2)' />
+    </button>
+  </div>
+
+  <div data-explorer>
+    <div class='separator mb-4'></div>
+
+    <FileExplorer tree={tree} />
+
+    <div class='languages'>
+      <a href={redirectToLocale(Languages.EN)}>
+        <span>EN</span>
+      </a>
+      <a href={redirectToLocale(Languages.RU)}>
+        <span>RU</span>
+      </a>
+      <a href={redirectToLocale(Languages.RO)}>
+        <span>RO</span>
+      </a>
+    </div>
+  </div>
 </aside>
+
+<script>
+  const sidebarToggle = document.querySelector('[data-sidebar-toggle]')
+  const sidebar = document.querySelector('[data-sidebar]')
+  const explorer = document.querySelector('[data-explorer]')
+
+  sidebarToggle?.addEventListener('click', () => {
+    sidebarToggle?.classList.toggle('active')
+    sidebar?.classList.toggle('active')
+    explorer?.classList.toggle('hide')
+  })
+
+  const ru = document.querySelector('[data-lng-ru')
+
+  ru?.addEventListener('click', () => {
+    const newUrl = location.pathname.split('/')
+    newUrl[2] = 'ru'
+
+    console.log(newUrl.join('/'), location)
+  })
+</script>
 
 <style>
   .sidebar {
-    width: 250px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-right: 2px solid #ddd;
-    height: 100vh;
     position: fixed;
-    top: 0;
+    background-color: var(--background);
+    padding: 8px;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom-right-radius: 8px;
+    left: -255px;
+    transition: left 0.2s;
+    width: 300px;
+  }
+  .sidebar.active {
+    left: 0;
+  }
+  .hide {
+    display: none;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
+  .separator {
+    height: 1px;
+    background-color: var(--background-3);
   }
 
-  .sidebar a {
-    display: block;
-    padding: 8px 12px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    margin: 5px 0;
+  .button {
+    padding: 4px;
+    border-radius: 4px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button:hover {
+    background-color: var(--background-3);
+    cursor: pointer;
   }
 
-  .sidebar a:hover {
-    background-color: #ddd;
+  [data-sidebar-toggle].active {
+    transform: rotate(180deg);
   }
 
-  .sidebar ul ul {
-    padding-left: 20px;
+  .languages {
+    font-size: 12px;
+    display: flex;
+    width: '100%';
+    justify-content: end;
+    color: var(--text-2);
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      height: 32px;
+      width: 32px;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--background-3);
+      }
+    }
+
+    .active {
+      color: var(--accent);
+    }
   }
 </style>

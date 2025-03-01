@@ -9,12 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.0",
-    "@excalidraw/excalidraw": "^0.17.6",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@astrojs/mdx": "^4.1.0",
+    "@fontsource-variable/open-sans": "^5.2.0",
+    "@fontsource/merriweather": "^5.2.0",
+    "@tailwindcss/vite": "^4.0.9",
     "astro": "^5.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-zoom-pan-pinch": "^3.7.0",
+    "rehype-callouts": "^2.0.2",
+    "svg-pan-zoom": "^3.6.2",
+    "tailwindcss": "^4.0.9"
   }
 }

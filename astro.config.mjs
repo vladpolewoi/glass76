@@ -1,21 +1,34 @@
 // @ts-check
 import { defineConfig } from 'astro/config'
+import tailwindcss from '@tailwindcss/vite'
+import rehypeCallouts from 'rehype-callouts'
 
-import react from '@astrojs/react'
-// import path from 'path'
+import mdx from '@astrojs/mdx'
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
-  markdown: {},
+  i18n: {
+    locales: ['en', 'ru', 'ro'],
+    defaultLocale: 'en',
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
+  integrations: [
+    mdx({
+      extendMarkdownConfig: false,
+    }),
+  ],
+  experimental: {
+    svg: true,
+  },
+  markdown: {
+    remarkPlugins: [],
+    rehypePlugins: [rehypeCallouts],
+  },
   vite: {
     define: {
       'process.env': {},
     },
-    // resolve: {
-    //   alias: {
-    //     '@': path.resolve(__dirname, 'src'),
-    //   },
-    // },
+    plugins: [tailwindcss()],
   },
 })

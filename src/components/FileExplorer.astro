@@ -1,0 +1,90 @@
+---
+import FolderSvg from '@/assets/folder.svg'
+import FolderOpenSvg from '@/assets/folder-open.svg'
+import FileSvg from '@/assets/file.svg'
+import PencilSvg from '@/assets/pencil.svg'
+
+import FileExplorerComponent from './FileExplorer.astro'
+
+const { tree } = Astro.props
+
+function isActive(node: any) {
+  return Astro.originPathname === node.slug
+}
+
+---
+
+<ul class='file-explorer'>
+  {
+    tree.children.map((node: any) => (
+      <li>{node.type === 'directory' && (
+
+        <div class="node flex" data-button>
+           <FolderSvg width={16} color='var(--text-2)' class="hidden" data-folder />
+           <FolderOpenSvg width={16} color='var(--text-2)' data-folder-open />
+          <span class="ml-2">{node.name}</span>
+        </div>
+
+        <div class="ml-6" data-content>
+          <FileExplorerComponent tree={node} />
+        </div>
+      )}
+      {node.type === 'file' && (
+        <a href={node.slug}>
+
+        <div class:list={["node", { active: isActive(node)}]}>
+          {node.ext === 'md' && <FileSvg width={16} color="var(--text-2)" />}
+          {node.ext === 'sketch' && <PencilSvg width={16} color="var(--text-2)" />}
+          <span class="ml-2">{node.name}</span>
+        </div>
+        </a>
+      )}
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  const buttons = document.querySelectorAll('[data-button]')
+  const contents = document.querySelectorAll('[data-content]')
+
+
+  buttons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      contents[index].classList.toggle('hidden')
+
+      const folder = button.querySelector('[data-folder]')
+      const folderOpen = button.querySelector('[data-folder-open]')
+      folder?.classList.toggle('hidden')
+      folderOpen?.classList.toggle('hidden')
+
+    })
+  })
+</script>
+
+<style>
+  .file-explorer {
+    list-style: none;
+  }
+  .node {
+    color: var(--text);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 4px 16px 4px 8px;
+    border-radius: 7px;
+    transition: 0.1s;
+    margin: 2px 0;
+  }
+  .node:hover {
+    background-color: var(--background-2); 
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .node.active {
+    background-color: var(--background-3);
+    cursor: default;
+    font-weight: 600;
+    color: var(--accent);
+  }
+</style>

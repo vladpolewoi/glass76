@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/open-sans';
+@import '@fontsource/merriweather';
+
+:root {
+  --background-0: #131020;
+  --background: #302d41;
+  --background-2: #575268;
+  --background-3: #1e1d2f;
+  --text: #d9e0ee;
+  --text-dark: #1a1823;
+  --text-2: #6e6c7e;
+  --accent: #abe9b3;
+  --h3: #b5e8e0;
+  --h5: #ddb6f2;
+  --strong: #e8eaf0;
+}
+
+html {
+  font-family: 'Open Sans Variable', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  /* Enable font smoothing on macOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Enhance font rendering on Windows */
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga' on;
+}
+
+body {
+  background-color: var(--background-0);
+}
+
+/* #f2cdcd
+#ddb6f2
+#f5c2e7
+#e8a2af
+#f28fad
+#f8bd96
+#fae3b0
+#abe9b3
+#b5e8e0
+#89dceb
+#96cdfb */
+/* #131020
+  #1a1823
+  #1e1d2f
+  #302d41
+  #575268
+  #6e6c7e
+  #988ba2
+  #c3bac6
+  #d9e0ee
+  #c9cbff
+  #f5e0dc */

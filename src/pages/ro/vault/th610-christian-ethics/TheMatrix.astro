@@ -1,0 +1,11 @@
+---
+import SvgViewer from '@/components/SvgViewer'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+---
+
+<BaseLayout>
+  <h1>Matric</h1>
+  <div class='bg-emerald-400 w-full h-full'>
+    <SvgViewer path='/public/EthicMatrix.svg' client:only='react' />
+  </div>
+</BaseLayout>
