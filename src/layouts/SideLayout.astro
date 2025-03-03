@@ -1,0 +1,31 @@
+---
+import 'rehype-callouts/theme/obsidian'
+import BaseLayout from './BaseLayout.astro'
+---
+
+<BaseLayout>
+  <div class='side open' data-side>
+    <slot />
+  </div>
+</BaseLayout>
+
+<script>
+  const sidebarToggle = document.querySelector('[data-sidebar-toggle]')
+  const side = document.querySelector('[data-side]')
+
+  sidebarToggle?.addEventListener('click', () => {
+    side?.classList.toggle('open')
+  })
+</script>
+
+<style is:global>
+  .side {
+    width: 100vw;
+  }
+
+  @media (min-width: 1500px) {
+    .side.open {
+      padding-left: 300px;
+    }
+  }
+</style>

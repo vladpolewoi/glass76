@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<script
+  type='module'
+  src='https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js'
+></script>
+
+<BaseLayout>
+  <div class='flex items-center justify-center w-full h-dvh'>
+    <spline-viewer
+      loading-anim-type='spinner-big-light'
+      url='https://prod.spline.design/PiDktVdLG4djMKEm/scene.splinecode'
+    ></spline-viewer>
+    <!-- <div class='flex flex-col items-center gap-8'>
+      <h1 class='text-8xl text-[var(--text)]'>
+        Bun venit la <span class='text-[var(--accent)]'>Glass76</span>!
+      </h1>
+      <h3 class='text-3xl text-[var(--text-2)]'>
+        Selectează un fișier din bara laterală pentru a previzualiza conținutul
+        acestuia.
+      </h3>
+    </div> -->
+  </div>
+</BaseLayout>

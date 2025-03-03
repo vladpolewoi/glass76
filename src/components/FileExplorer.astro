@@ -3,6 +3,7 @@ import FolderSvg from '@/assets/folder.svg'
 import FolderOpenSvg from '@/assets/folder-open.svg'
 import FileSvg from '@/assets/file.svg'
 import PencilSvg from '@/assets/pencil.svg'
+import BookSvg from '@/assets/book.svg'
 
 import FileExplorerComponent from './FileExplorer.astro'
 
@@ -22,7 +23,7 @@ function isActive(node: any) {
         <div class="node flex" data-button>
            <FolderSvg width={16} color='var(--text-2)' class="hidden" data-folder />
            <FolderOpenSvg width={16} color='var(--text-2)' data-folder-open />
-          <span class="ml-2">{node.name}</span>
+          <span class="ml-2 truncate">{node.name}</span>
         </div>
 
         <div class="ml-6" data-content>
@@ -33,9 +34,12 @@ function isActive(node: any) {
         <a href={node.slug}>
 
         <div class:list={["node", { active: isActive(node)}]}>
-          {node.ext === 'md' && <FileSvg width={16} color="var(--text-2)" />}
-          {node.ext === 'sketch' && <PencilSvg width={16} color="var(--text-2)" />}
-          <span class="ml-2">{node.name}</span>
+          <div>
+            {node.ext === 'md' && <FileSvg width={16} color="var(--text-2)" />}
+            {node.ext === 'pdf' && <BookSvg width={16} color="var(--text-2)" />}
+            {node.ext === 'sketch' && <PencilSvg width={16} color="var(--text-2)" />}
+          </div>
+          <span class="ml-2 truncate">{node.name}</span>
         </div>
         </a>
       )}

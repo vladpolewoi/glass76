@@ -4,6 +4,7 @@ import LogoSvg from '@/assets/logo.svg'
 import FileExplorer from './FileExplorer.astro'
 import { Languages } from '@/hooks/useLanguage'
 
+const th610Link = 'vault/th610-christian-ethics'
 const tree = {
   name: 'root',
   type: 'directory',
@@ -41,13 +42,73 @@ const tree = {
           name: 'Reflections',
           type: 'file',
           ext: 'sketch',
-          slug: '/vault/th610-christian-ethics/reflections',
+          slug: getLink('vault/th610-christian-ethics/reflections'),
         },
         {
           name: 'Intro',
           type: 'file',
           ext: 'md',
-          slug: '/en/vault/th610-christian-ethics/intro',
+          slug: getLink('vault/th610-christian-ethics/intro'),
+        },
+        {
+          name: 'Books',
+          type: 'directory',
+          children: [
+            {
+              name: 'An Introduction To Christian Ethics Goals Duties and Virtues',
+              type: 'file',
+              ext: 'pdf',
+              slug: getLink(
+                `${th610Link}/books/an-introduction-to-christian-ethics`
+              ),
+            },
+            {
+              name: 'Christian Virtue Ethics (Meego)',
+              type: 'file',
+              ext: 'pdf',
+              slug: getLink(`${th610Link}/books/christian-virtue-ethics-meego`),
+            },
+            {
+              name: 'The Matrix of Christian Ethics',
+              type: 'file',
+              ext: 'pdf',
+              slug: getLink(
+                `${th610Link}/books/the-matrix-of-christian-ethics`
+              ),
+            },
+            {
+              name: 'Virtues and Practices in the Christian Tradition',
+              type: 'file',
+              ext: 'pdf',
+              slug: getLink(
+                `${th610Link}/books/virtues-and-practices-in-the-christian-tradition`
+              ),
+            },
+          ],
+        },
+        {
+          name: 'Introduction To Christian Ethics',
+          type: 'directory',
+          children: [
+            {
+              name: 'Notes',
+              type: 'file',
+              ext: 'sketch',
+              slug: getLink(`${th610Link}/IntroductionToChristianEthics/notes`),
+            },
+            {
+              name: '4 Goods, Goals, and God',
+              type: 'file',
+              ext: 'md',
+              slug: getLink(`${th610Link}/IntroductionToChristianEthics/4`),
+            },
+            {
+              name: '5 The Greatest Good For The Greatest Number?',
+              type: 'file',
+              ext: 'md',
+              slug: getLink(`${th610Link}/IntroductionToChristianEthics/5`),
+            },
+          ],
         },
       ],
     },
@@ -61,14 +122,21 @@ function redirectToLocale(locale: Languages) {
 
   return split.join('/')
 }
+
+function getLink(path: string) {
+  console.log('asd', Astro.currentLocale)
+  return `/${Astro.currentLocale}/${path}`
+}
 ---
 
 <aside class:list={['sidebar', { active: true }]} data-sidebar>
   <div class='sidebar-header'>
-    <div class='flex items-center gap-2'>
-      <LogoSvg color='var(--accent)' height={32} />
-      <h1 class='font-extrabold text-2xl'>Glass76</h1>
-    </div>
+    <a href={getLink('')}>
+      <div class='flex items-center gap-2'>
+        <LogoSvg color='var(--accent)' height={32} />
+        <h1 class='font-extrabold text-2xl'>Glass76</h1>
+      </div>
+    </a>
 
     <button class='button' data-sidebar-toggle>
       <SidebarLeftCollapseSvg width={24} color='var(--text-2)' />
@@ -128,6 +196,7 @@ function redirectToLocale(locale: Languages) {
     left: -255px;
     transition: left 0.2s;
     width: 300px;
+    z-index: 1;
   }
   .sidebar.active {
     left: 0;
