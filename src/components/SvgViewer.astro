@@ -71,6 +71,35 @@ const { url } = Astro.props
           panZoomInstance.enablePan() // Enable zoom again
         }
       })
+
+      // Enable touch event handling for mobile
+      svgDoc.addEventListener(
+        'touchstart',
+        (e) => {
+          // Handle touchstart event to initialize pan/zoom
+          panZoomInstance.enablePan()
+          panZoomInstance.zoomIn()
+        },
+        { passive: true }
+      )
+
+      svgDoc.addEventListener(
+        'touchmove',
+        (e) => {
+          // Handle touchmove for pan
+          panZoomInstance.handleTouchMove(e)
+        },
+        { passive: true }
+      )
+
+      svgDoc.addEventListener(
+        'touchend',
+        (e) => {
+          // Handle touchend for stopping pan/zoom
+          panZoomInstance.handleTouchEnd()
+        },
+        { passive: true }
+      )
     }
   }
 </script>
