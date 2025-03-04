@@ -207,19 +207,18 @@ function getLink(path: string) {
   const sidebar = document.querySelector('[data-sidebar]')
   const explorer = document.querySelector('[data-explorer]')
 
+  const isMobile = window.innerWidth < 787
+
+  if (isMobile) {
+    sidebarToggle?.classList.toggle('active')
+    sidebar?.classList.toggle('active')
+    explorer?.classList.toggle('hide')
+  }
+
   sidebarToggle?.addEventListener('click', () => {
     sidebarToggle?.classList.toggle('active')
     sidebar?.classList.toggle('active')
     explorer?.classList.toggle('hide')
-  })
-
-  const ru = document.querySelector('[data-lng-ru')
-
-  ru?.addEventListener('click', () => {
-    const newUrl = location.pathname.split('/')
-    newUrl[2] = 'ru'
-
-    console.log(newUrl.join('/'), location)
   })
 </script>
 

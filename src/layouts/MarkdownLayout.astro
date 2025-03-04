@@ -14,9 +14,17 @@ import BaseLayout from './BaseLayout.astro'
   const sidebarToggle = document.querySelector('[data-sidebar-toggle]')
   const markdown = document.querySelector('[data-markdown]')
 
+  const isMobile = window.innerWidth < 787
+
   sidebarToggle?.addEventListener('click', () => {
-    markdown?.classList.toggle('open')
+    if (!isMobile) {
+      markdown?.classList.toggle('open')
+    }
   })
+
+  if (isMobile) {
+    markdown?.classList.toggle('open')
+  }
 </script>
 
 <style is:global>
@@ -27,6 +35,12 @@ import BaseLayout from './BaseLayout.astro'
     transition: 0.3s;
     padding: 50px;
     font-size: 18px;
+  }
+
+  @media (max-width: 787px) {
+    .markdown {
+      padding: 16px;
+    }
   }
 
   @media (max-width: 1500px) {
