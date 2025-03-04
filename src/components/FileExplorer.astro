@@ -26,7 +26,7 @@ function isActive(node: any) {
           <span class="ml-2 truncate">{node.name}</span>
         </div>
 
-        <div class="ml-6" data-content>
+        <div class:list={["ml-4 pl-2 border-l border-[var(--background-3)] border-dashed", {hidden: node.closed}]} data-content>
           <FileExplorerComponent tree={node} />
         </div>
       )}

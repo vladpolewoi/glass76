@@ -16,43 +16,57 @@ const tree = {
         {
           name: 'Persons',
           type: 'directory',
+          closed: true,
           children: [
+            {
+              name: 'Socrates',
+              type: 'file',
+              ext: 'md',
+              active: true,
+              slug: getLink(`${th610Link}/persons/socrates`),
+            },
             {
               name: 'Plato',
               type: 'file',
               ext: 'md',
               active: true,
-              slug: '/vault/th610-christian-ethics/persons/plato',
+              slug: getLink(`${th610Link}/persons/plato`),
             },
             {
-              name: 'Aristotel',
+              name: 'Plotinus',
               type: 'file',
               ext: 'md',
-              slug: '/vault/th610-christian-ethics/persons/aristotel',
+              active: true,
+              slug: getLink(`${th610Link}/persons/plotinus`),
+            },
+            {
+              name: 'Porphyry',
+              type: 'file',
+              ext: 'md',
+              active: true,
+              slug: getLink(`${th610Link}/persons/porphyry`),
+            },
+            {
+              name: 'Augustine',
+              type: 'file',
+              ext: 'md',
+              active: true,
+              slug: getLink(`${th610Link}/persons/augustine`),
+            },
+            {
+              name: 'Reinhhold Niebuhr',
+              type: 'file',
+              ext: 'md',
+              active: true,
+              slug: getLink(`${th610Link}/persons/reinhold-niebuhr`),
             },
           ],
         },
-        {
-          name: 'The Matrix of Christian Ethics',
-          type: 'file',
-          ext: 'sketch',
-          slug: '/vault/th610-christian-ethics/the-matrix-of-christian-ethics',
-        },
-        {
-          name: 'Reflections',
-          type: 'file',
-          ext: 'sketch',
-          slug: getLink('vault/th610-christian-ethics/reflections'),
-        },
-        {
-          name: 'Intro',
-          type: 'file',
-          ext: 'md',
-          slug: getLink('vault/th610-christian-ethics/intro'),
-        },
+
         {
           name: 'Books',
           type: 'directory',
+          closed: true,
           children: [
             {
               name: 'An Introduction To Christian Ethics Goals Duties and Virtues',
@@ -110,6 +124,24 @@ const tree = {
             },
           ],
         },
+        {
+          name: 'The Matrix of Christian Ethics',
+          type: 'file',
+          ext: 'sketch',
+          slug: getLink(`${th610Link}/the-matrix-of-christian-ethics`),
+        },
+        {
+          name: 'Christian Virtue Ethics (Meego)',
+          type: 'file',
+          ext: 'sketch',
+          slug: getLink(`${th610Link}/christian-virtue-ethics-meego`),
+        },
+        {
+          name: 'Reflections',
+          type: 'file',
+          ext: 'sketch',
+          slug: getLink('vault/th610-christian-ethics/reflections'),
+        },
       ],
     },
   ],
@@ -124,7 +156,6 @@ function redirectToLocale(locale: Languages) {
 }
 
 function getLink(path: string) {
-  console.log('asd', Astro.currentLocale)
   return `/${Astro.currentLocale}/${path}`
 }
 ---
@@ -148,14 +179,23 @@ function getLink(path: string) {
 
     <FileExplorer tree={tree} />
 
-    <div class='languages'>
-      <a href={redirectToLocale(Languages.EN)}>
+    <div class='languages mt-8'>
+      <a
+        href={redirectToLocale(Languages.EN)}
+        class:list={[{ active: Astro.currentLocale === 'en' }]}
+      >
         <span>EN</span>
       </a>
-      <a href={redirectToLocale(Languages.RU)}>
+      <a
+        href={redirectToLocale(Languages.RU)}
+        class:list={[{ active: Astro.currentLocale === 'ru' }]}
+      >
         <span>RU</span>
       </a>
-      <a href={redirectToLocale(Languages.RO)}>
+      <a
+        href={redirectToLocale(Languages.RO)}
+        class:list={[{ active: Astro.currentLocale === 'ro' }]}
+      >
         <span>RO</span>
       </a>
     </div>
